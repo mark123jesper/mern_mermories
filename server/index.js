@@ -16,9 +16,6 @@ import postsRoutes from './routes/posts.js';
 // react-file-base64 -> convert images
 // redux & redux-thunk -> responsible for async actions in redux
 // react-redux
-dotenv.config({
-	path: './.env',
-});
 const app = express();
 app.use(express.json({ limit: '30mb', extended: true }));
 //express. json() is a method inbuilt in express to recognize the incoming Request Object as a JSON Object
@@ -28,8 +25,13 @@ app.use(cors());
 
 app.use('/posts', postsRoutes);
 
+dotenv.config();
 const mongodb_url = process.env.MONGODB_URL;
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
+
+app.get('/', (req, res) => {
+	res.send('Welcome to Memories API');
+});
 
 mongoose
 	.connect(mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true })

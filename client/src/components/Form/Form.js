@@ -16,6 +16,7 @@ const Form = ({ currentId, setCurrentId }) => {
 		message: '',
 		tags: '',
 		selectedFile: '',
+		createdAt: new Date(),
 	});
 	const [isInvalid, setIsInvalid] = useState(false);
 	const dispatch = useDispatch();
