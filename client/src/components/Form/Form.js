@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
-	const post = useSelector((state)=> currentId ? state.posts.find((post)=>post._id === currentId) : null);
+	const post = useSelector((state) =>
+		currentId ? state.posts.find((post) => post._id === currentId) : null
+	);
 	const classes = useStyles();
 	const [postData, setPostData] = useState({
 		creator: '',
@@ -15,21 +17,32 @@ const Form = ({ currentId, setCurrentId }) => {
 		tags: '',
 		selectedFile: '',
 	});
+	const [isInvalid, setIsInvalid] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (post) setPostData(post);
-	}, [post])
+	}, [post]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (currentId) {
-			dispatch(updatePost(currentId, postData));
+		if (
+			postData.creator === '' ||
+			postData.title === '' ||
+			postData.message === '' ||
+			postData.message === '' ||
+			postData.tags === ''
+		) {
+			setIsInvalid(true);
 		} else {
-			dispatch(createPost(postData));
-		};
-		clear();
+			if (currentId) {
+				dispatch(updatePost(currentId, postData));
+			} else {
+				dispatch(createPost(postData));
+			}
+			clear();
+		}
 	};
 
 	const clear = () => {
@@ -41,6 +54,7 @@ const Form = ({ currentId, setCurrentId }) => {
 			tags: '',
 			selectedFile: '',
 		});
+		setIsInvalid(false);
 	};
 
 	return (
@@ -50,7 +64,9 @@ const Form = ({ currentId, setCurrentId }) => {
 				noValidate
 				className={`${classes.root} ${classes.form}`}
 				onSubmit={handleSubmit}>
-				<Typography variant='h6'>{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
+				<Typography variant='h6'>
+					{currentId ? 'Editing' : 'Creating'} a Memory
+				</Typography>
 				<TextField
 					name='creator'
 					variant='outlined'
@@ -61,6 +77,16 @@ const Form = ({ currentId, setCurrentId }) => {
 						setPostData({ ...postData, creator: e.target.value })
 					}
 				/>
+				{isInvalid
+					?
+					(postData.creator === '' || /^\s*$/.test(postData.creator))
+					?
+					<Typography variant="subtitle2" style={{ color: 'red' }}>Please entry input</Typography>
+					:
+					null
+					:
+					null
+				}
 				<TextField
 					name='title'
 					variant='outlined'
@@ -69,6 +95,16 @@ const Form = ({ currentId, setCurrentId }) => {
 					value={postData.title}
 					onChange={(e) => setPostData({ ...postData, title: e.target.value })}
 				/>
+				{isInvalid
+					?
+					(postData.title === '' || /^\s*$/.test(postData.title))
+					?
+					<Typography variant="subtitle2" style={{ color: 'red' }}>Please entry input</Typography>
+					:
+					null
+					:
+					null
+				}
 				<TextField
 					name='message'
 					variant='outlined'
@@ -80,14 +116,34 @@ const Form = ({ currentId, setCurrentId }) => {
 						setPostData({ ...postData, message: e.target.value })
 					}
 				/>
+				{isInvalid
+					?
+					(postData.message === '' || /^\s*$/.test(postData.message))
+					?
+					<Typography variant="subtitle2" style={{ color: 'red' }}>Please entry input</Typography>
+					:
+					null
+					:
+					null
+				}
 				<TextField
 					name='tags'
 					variant='outlined'
 					label='Tags'
 					fullWidth
 					value={postData.tags}
-					onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+					onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
 				/>
+				{isInvalid
+					?
+					(postData.tags === '' || /^\s*$/.test(postData.tags))
+					?
+					<Typography variant="subtitle2" style={{ color: 'red' }}>Please entry input</Typography>
+					:
+					null
+					:
+					null
+				}
 				<div className={classes.fileInput}>
 					<FileBase
 						type='file'

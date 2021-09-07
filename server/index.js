@@ -36,6 +36,6 @@ mongoose
 	.then(() =>
 		app.listen(port, () => console.log(`Server listening on port: ${port}`))
 	)
-	.catch((err) => console.log(err.message));
+	.catch((err) => console.log(err));
 
 // mongoose.set('useFindAndModify', false); -> for mongoose v5 only
