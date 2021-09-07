@@ -21,7 +21,9 @@ dotenv.config({
 });
 const app = express();
 app.use(express.json({ limit: '30mb', extended: true }));
+//express. json() is a method inbuilt in express to recognize the incoming Request Object as a JSON Object
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
+//express. urlencoded() is a method inbuilt in express to recognize the incoming Request Object as strings or arrays
 app.use(cors());
 
 app.use('/posts', postsRoutes);
