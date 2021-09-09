@@ -1,13 +1,9 @@
 import axios from 'axios';
-// import dotenv from 'dotenv';
 
-// dotenv.config({
-//     path: '../../.env'
-// });
-const apiBaseUrl = process.env.API_BASEURL;
+const apiBaseUrl = 'https://mern-memories-beta.herokuapp.com/';
 
 // for fetching all data from the database 
-const API = axios.create({ baseURL: `${apiBaseUrl}` });
+const API = axios.create({ baseURL: apiBaseUrl })
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('Profile')) {
