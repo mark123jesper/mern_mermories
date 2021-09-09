@@ -1,7 +1,9 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({
+    path: '../../.env'
+});
 const apiBaseUrl = process.env.API_BASEURL;
 
 // for fetching all data from the database 
