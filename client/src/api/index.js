@@ -7,7 +7,7 @@ import axios from 'axios';
 const apiBaseUrl = process.env.API_BASEURL;
 
 // for fetching all data from the database 
-const API = axios.create({ baseURL: apiBaseUrl });
+const API = axios.create({ baseURL: `${apiBaseUrl}` });
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('Profile')) {
