@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
 
+// creating schema for post CRUD
+
 const postSchema = mongoose.Schema({
 	title: String,
 	message: String,
+	name: String,
 	creator: String,
 	tags: [String],
 	selectedFile: String,
-	likeCount: {
-		type: Number,
-		default: 0,
+	likes: {
+		type: [String],
+		default: [],
 	},
 	createdAt: {
 		type: Date,

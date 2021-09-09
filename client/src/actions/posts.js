@@ -1,19 +1,19 @@
 import * as api from '../api';
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
-//Action Creators
+//Action Creators for post CRUD
 export const getPosts = () => async (dispatch) => {
 	try {
-		const { data } = await api.fetchPost();
+		const { data } = await api.fetchPosts();
 		dispatch({ type: FETCH_ALL, payload: data });
 	} catch (error) {
 		console.log(error.message);
 	}
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPosts = (post) => async (dispatch) => {
 	try {
-		const { data } = await api.createPost(post);
+		const { data } = await api.createPosts(post);
 		dispatch({ type: CREATE, payload: data });
 	} catch (error) {
 		console.log(error.message);

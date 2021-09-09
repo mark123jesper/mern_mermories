@@ -1,6 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
+
+//logic actions for post CRUD -> paired with actions folder (refer actions folder)
+
 export default (posts = [], action) => {
 	switch (action.type) {
 		case FETCH_ALL:
