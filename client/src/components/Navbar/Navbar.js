@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import {
 	AppBar,
@@ -60,7 +61,7 @@ const Navbar = (props) => {
 		if (token) {
 			const decodedToken = decode(token);
 
-			if (decodedToken.expires * 1000 > new Date().getTime()) {
+			if (decodedToken.exp * 1000 > new Date().getTime()) {
 				logout();
 			}
 		}
