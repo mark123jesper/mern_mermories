@@ -1,7 +1,11 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const apiBaseUrl = process.env.API_BASEURL;
 
 // for fetching all data from the database 
-const API = axios.create({ baseURL: "http://localhost:3000" });
+const API = axios.create({ baseURL: apiBaseUrl });
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('Profile')) {
