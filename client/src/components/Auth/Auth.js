@@ -64,11 +64,12 @@ const Auth = () => {
 			history.push('/');
 		} catch (error) {
 			console.log(error);
+			console.log('Google Sign In Failed')
 		}
 	};
 
-	const googleFailure = () => {
-		alert('Google Sign In Failed');
+	const googleFailure = (error) => {
+		console.log(error)
 	};
 
 	return (
