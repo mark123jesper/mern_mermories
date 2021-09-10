@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({
+	path: '../.env'
+});
 const bcryptSecret = process.env.BCRYPT_SECRET;
 
 const auth = async (req, res, next) => {

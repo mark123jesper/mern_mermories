@@ -6,7 +6,9 @@ import jwt from 'jsonwebtoken';
 import UserModel from '../models/UserModel.js';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({
+    path: '../.env'
+});
 const bcryptSecret = process.env.BCRYPT_SECRET
 const bcryptExpiresIn = process.env.BCRYPT_EXPIRESIN
 
